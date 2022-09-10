@@ -90,14 +90,14 @@ public class ChessMatch {
         // SPECIAL MOVE - PROMOTION
         promoted = null;
         if (movedPiece instanceof Pawn) {
-            if (movedPiece.getColor() == Color.WHITE && target.getRow() == 0 || movedPiece.getColor() == Color.BLACK && target.getRow() == 7) {
+            if ((movedPiece.getColor() == Color.WHITE && target.getRow() == 0) || (movedPiece.getColor() == Color.BLACK && target.getRow() == 7)) {
                 promoted = (ChessPiece)board.piece(target);
                 promoted = replacePromotedPiece("Q");
             }
         }
 
 
-        check = testCheck(opponent(currentPlayer));
+        check = (testCheck(opponent(currentPlayer))) ? true : false;
 
         if (testCheckMate(opponent(currentPlayer))) {
             checkMate = true;
@@ -129,7 +129,7 @@ public class ChessMatch {
 
         ChessPiece newPiece = newPiece(type, promoted.getColor());
         board.placePiece(newPiece, pos);
-        piecesOnTheBoard.add(p);
+        piecesOnTheBoard.add(newPiece);
 
         return newPiece;
 
